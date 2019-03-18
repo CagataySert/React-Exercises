@@ -23,6 +23,12 @@ class User extends Component {
 		});
 	}
 
+	onDeleteUser = (e) => {
+		const { id, deleteUser } = this.props;
+
+		deleteUser(id);
+	}
+
 	render() {
 		const { name, department, salary } = this.props;
 		const { isVisible } = this.state;
@@ -32,7 +38,7 @@ class User extends Component {
 				<div className="card">
 					<div className="card-header d-flex justify-content-between">
 						<h4 className="d-inline" onClick={this.onClickEvent}>{name}</h4>
-						<i className="far fa-trash-alt" style={{ cursor: 'pointer' }} />
+						<i onClick={this.onDeleteUser} className="far fa-trash-alt" style={{ cursor: 'pointer' }} />
 					</div>
 					{
 						isVisible ?
@@ -56,6 +62,7 @@ User.defaultProps = {
 User.propTypes = {
 	name: PropTypes.string.isRequired,
 	salary: PropTypes.string.isRequired,
-	department: PropTypes.string.isRequired
+	department: PropTypes.string.isRequired,
+	deleteUser: PropTypes.func.isRequired
 };
 export default User;
