@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import UserConsumer from '../context'
 class User extends Component {
-	// constructor(props) {
-	// 	super(props);
 
-	// 	this.state = {
-	// 		isVisible: false
-	// 	};
-	// },
-	// constructor(props) {
-	// 	super(props);
-	// 	this.onClickEvent = this.onClickEvent.bind(this);
-	// }
 	state = {
 		isVisible: false
 	};
@@ -23,10 +13,10 @@ class User extends Component {
 		});
 	}
 
-	onDeleteUser = (e) => {
-		const { id, deleteUser } = this.props;
-
-		deleteUser(id);
+	onDeleteUser = (dispatch, e) => {
+		const { id } = this.props;
+		// // Consumer Dispatch
+		dispatch({ type: "DELETE_USER", payload: id });
 	}
 
 	render() {
@@ -34,22 +24,33 @@ class User extends Component {
 		const { isVisible } = this.state;
 
 		return (
-			<div className="col-md-8 mb-4">
-				<div className="card">
-					<div className="card-header d-flex justify-content-between">
-						<h4 className="d-inline" onClick={this.onClickEvent}>{name}</h4>
-						<i onClick={this.onDeleteUser} className="far fa-trash-alt" style={{ cursor: 'pointer' }} />
-					</div>
-					{
-						isVisible ?
-							<div className="card-body">
-								<p className="card-text">Maaş : {salary}</p>
-								<p className="card-text">department : {department}</p>
-							</div> : null
+			<UserConsumer>
+				{
+					value => {
+						const { dispatch } = value;
+
+						return (
+							<div className="col-md-8 mb-4">
+								<div className="card" style={isVisible ? { backgroundColor: "#62848d", color: "white" } : null}>
+									<div className="card-header d-flex justify-content-between">
+										<h4 className="d-inline" onClick={this.onClickEvent}>{name}</h4>
+										<i onClick={this.onDeleteUser.bind(this, dispatch)} className="far fa-trash-alt" style={{ cursor: 'pointer' }} />
+									</div>
+									{
+										isVisible ?
+											<div className="card-body">
+												<p className="card-text">Maaş : {salary}</p>
+												<p className="card-text">department : {department}</p>
+											</div> : null
+									}
+								</div>
+							</div>
+						);
 					}
-				</div>
-			</div>
-		);
+				}
+			</UserConsumer>
+		)
+
 	}
 }
 
@@ -63,6 +64,6 @@ User.propTypes = {
 	name: PropTypes.string.isRequired,
 	salary: PropTypes.string.isRequired,
 	department: PropTypes.string.isRequired,
-	deleteUser: PropTypes.func.isRequired
+	id: PropTypes.string.isRequired
 };
 export default User;
