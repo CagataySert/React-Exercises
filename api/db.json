@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Çağatay Sert",
+      "salary": "4000",
+      "department": "Bilişim"
+    },
+    {
+      "id": "3",
+      "name": "Tarık Sert",
+      "salary": "6000",
+      "department": "Pazarlama"
+    },
+    {
+      "name": "Mustafa Murat Coşkun",
+      "salary": "7000",
+      "department": "Bilişim",
+      "id": "bQnmaQR"
+    },
+    {
+      "name": "Munevver Sert",
+      "salary": "5000",
+      "department": "İnsan Kaynakları",
+      "id": "Y6eEy0F"
+    }
+  ]
+}
