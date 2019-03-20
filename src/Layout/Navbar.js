@@ -13,6 +13,9 @@ const Navbar = (props) => {
 				<li>
 					<Link to="/add">Add User</Link>
 				</li>
+				<li>
+					<Link to="/github">Project Files</Link>
+				</li>
 			</ul>
 		</div>
 	);
